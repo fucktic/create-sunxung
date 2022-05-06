@@ -1,0 +1,32 @@
+{
+  "name": "create-sunxung",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "create-sunxung": "index.js",
+    "cva": "index.js"
+  },
+  "files": [
+    "index.js",
+    "template-*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://git.sunxung.com/sunxung/create-sunxung.git"
+  },
+  "author": "sunxung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://git.sunxung.com/sunxung/issues"
+  },
+  "homepage": "https://git.sunxung.com/sunxung/create-sunxung#readme",
+  "dependencies": {
+    "kolorist": "^1.5.1",
+    "minimist": "^1.2.6",
+    "prompts": "^2.4.2"
+  }
+}

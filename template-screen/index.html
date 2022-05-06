@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>loading</title>
+  </head>
+  <body>
+    <div id="BrowserDownloadModal" style="visibility: hidden;
+        z-index: 99999;
+        position: fixed;
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        background: #0009;"><div style="width: 520px;
+          height: 560px;
+          background: #fff;
+          text-align: center;
+          margin: 0;
+          padding: 40px;
+          font-size: 14px;
+          position: relative;">
+          <img onclick="closeBrowserDownloadModal01dd6c693c7947cab6ec8d3204635c95()" src="./src/assets/images/icon_close.png" id="BrowserDownloadModalI" alt="关闭" style="position: absolute; top: 6px; right: 8px; cursor: pointer" >
+          <img width="216" height="110" src="./src/assets/images/u27.png">
+          <div style="margin-top: 40px; color: #666">
+            您所使用的的浏览器版本较低或与系统不兼容，可能会导致部分可视化效果无法渲染 建议采用Chrome v78版本以上浏览器进行操作</div>
+          <div style="border-top: dashed 1px #e4e4e4; margin-top: 80px">
+          <div style="color: #999; display: inline-block; background: '#fff'; padding: 0 15px; top: -12px; position: relative">
+            点击即可下载，更新即刻搞定</div>
+          </div>
+          <div style="margin-top: 56px; color: #666; display: inline-block">
+            <a href="https://www.google.cn/chrome/" target="_blank">
+              <img width="50" height="50" src="./src/assets/images/chrome.png">
+              <div style="margin-top: 15px">谷歌（Chrome）</div>
+            </a>
+          </div>
+        </div>
+    </div>
+    <script>
+      function closeBrowserDownloadModal01dd6c693c7947cab6ec8d3204635c95() {
+        const div = document.getElementById('BrowserDownloadModal');
+        div.style.visibility = 'hidden';
+        const maxAge = 3 * 24 * 3600;
+        document.cookie = 'hide_download=true; max-age=' + maxAge + '};';
+      }
+      window.onload = function () {
+        function getChromeVersion(isAppleChrome) {
+          const raw = isAppleChrome
+            ? navigator.userAgent.match(/Cr(iOS)\/([0-9]+)\./)
+            : navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
+          return raw ? parseInt(raw[2], 10) : false;
+        }
+        // 初始化
+        document.addEventListener(
+          'IS_ENV_DETECTION',
+          function () {
+            if (window.appConfig.IS_ENV_DETECTION) {
+              let flag = true;
+              const isMobile = /(ipad|iphone|android|ucweb|windows phone)/.test(navigator.userAgent.toLowerCase());
+              const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+              const isIE = /Trident/.test(navigator.userAgent);
+              const isAppleChrome = /CriOS/.test(navigator.userAgent);
+              if (isMobile) {
+                flag = false;
+              } else if (isChrome) {
+                if (getChromeVersion(isAppleChrome) > 78) {
+                  flag = false;
+                }
+              }
+              if (flag && (!document.cookie.includes('hide_download') || isIE)) {
+                const div = document.getElementById('BrowserDownloadModal');
+                div.style.visibility = 'visible';
+                if (isIE) {
+                  document.getElementById('BrowserDownloadModalI').style.display = 'none';
+                }
+              }
+            }
+          },
+          false
+        );
+      };
+    </script>
+   <div id="sx-app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
